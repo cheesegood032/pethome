@@ -9,7 +9,7 @@
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="name" label="商品名称"></el-table-column>
       <el-table-column prop="category" label="分类"></el-table-column>
-      <el-table-column prop="petType" label="适用宠物"></el-table-column>
+      <el-table-column prop="pet_type" label="适用宠物"></el-table-column>
       <el-table-column prop="price" label="价格" width="100">
         <template slot-scope="scope">¥{{ scope.row.price }}</template>
       </el-table-column>
@@ -31,11 +31,46 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 商品表单弹窗 -->
+    <el-dialog :title="form.id ? '编辑商品' : '添加商品'" :visible.sync="dialogVisible" width="500px">
+      <el-form :model="form" ref="productForm" label-width="80px">
+        <el-form-item label="商品名称" prop="name" :rules="[{ required: true, message: '请输入商品名称' }]">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="分类" prop="category">
+          <el-input v-model="form.category"></el-input>
+        </el-form-item>
+        <el-form-item label="适用宠物" prop="pet_type">
+          <el-select v-model="form.pet_type" placeholder="请选择">
+            <el-option label="猫" value="猫"></el-option>
+            <el-option label="狗" value="狗"></el-option>
+            <el-option label="通用" value="通用"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="价格" prop="price">
+          <el-input-number v-model="form.price" :precision="2" :step="1" :min="0"></el-input-number>
+        </el-form-item>
+        <el-form-item label="库存" prop="stock">
+          <el-input-number v-model="form.stock" :min="0" :step="1"></el-input-number>
+        </el-form-item>
+        <el-form-item label="规格" prop="spec">
+          <el-input v-model="form.spec"></el-input>
+        </el-form-item>
+        <el-form-item label="商品描述" prop="description">
+          <el-input type="textarea" v-model="form.description"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getAllProducts, deleteProduct, updateProduct } from '@/api/product'
+import { getAllProducts, deleteProduct, updateProduct, addProduct } from '@/api/product'
 import { Message } from 'element-ui'
 
 export default {
@@ -43,7 +78,18 @@ export default {
   data() {
     return {
       products: [],
-      searchKeyword: ''
+      searchKeyword: '',
+      dialogVisible: false,
+      form: {
+        id: null,
+        name: '',
+        category: '',
+        pet_type: '',
+        price: 0,
+        stock: 0,
+        spec: '',
+        description: ''
+      }
     }
   },
   mounted() {
@@ -52,8 +98,10 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const res = await getAllProducts()
-        this.products = res.data
+        const params = {}
+        if (this.searchKeyword) params.keyword = this.searchKeyword
+        const res = await getAllProducts(params)
+        this.products = res.data.list || res.data
       } catch (e) {
         console.error(e)
       }
@@ -62,14 +110,34 @@ export default {
       this.fetchProducts()
     },
     handleAdd() {
-      this.$message.info('添加商品功能')
+      this.form = { id: null, name: '', category: '', pet_type: '', price: 0, stock: 0, spec: '', description: '' }
+      this.dialogVisible = true
     },
     handleEdit(row) {
-      this.$message.info('编辑商品: ' + row.name)
+      this.form = { ...row }
+      this.dialogVisible = true
+    },
+    submitForm() {
+      this.$refs.productForm.validate(async valid => {
+        if (!valid) return
+        try {
+          if (this.form.id) {
+            await updateProduct(this.form)
+            Message.success('更新成功')
+          } else {
+            await addProduct(this.form)
+            Message.success('添加成功')
+          }
+          this.dialogVisible = false
+          this.fetchProducts()
+        } catch (e) {
+          console.error(e)
+        }
+      })
     },
     async handleToggleStatus(row) {
       try {
-        await updateProduct({ ...row, status: row.status === 1 ? 0 : 1 })
+        await updateProduct({ id: row.id, status: row.status === 1 ? 0 : 1 })
         Message.success('状态更新成功')
         this.fetchProducts()
       } catch (e) {

@@ -23,3 +23,11 @@ export function completeOrder(orderId) {
 export function cancelOrder(orderId) {
   return request({ url: '/order/cancel', method: 'post', data: { orderId } })
 }
+
+export function getAdminOrderList(params) {
+  return request({ url: '/admin/order/list', method: 'get', params })
+}
+
+export function shipOrder(orderId) {
+  return request({ url: '/admin/order/ship', method: 'post', data: { orderId } })
+}

@@ -6,11 +6,12 @@
         <span class="logo-text">宠物之家</span>
       </div>
       <nav class="nav">
-        <router-link to="/" class="nav-item" exact>🏠 首页</router-link>
-        <router-link to="/goods" class="nav-item">🛍️ 商城</router-link>
-        <router-link to="/foster" class="nav-item">🏡 寄养预约</router-link>
-        <router-link to="/order" class="nav-item">📦 我的订单</router-link>
-        <router-link to="/profile" class="nav-item">👤 个人中心</router-link>
+        <router-link to="/" class="nav-item" exact>首页</router-link>
+        <router-link to="/goods" class="nav-item">商城</router-link>
+        <router-link to="/foster" class="nav-item">寄养预约</router-link>
+        <router-link to="/cart" class="nav-item">购物车</router-link>
+        <router-link to="/order" class="nav-item">我的订单</router-link>
+        <router-link to="/profile" class="nav-item">个人中心</router-link>
       </nav>
       <div class="user-area">
         <template v-if="!isLoggedIn">

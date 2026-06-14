@@ -7,7 +7,10 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:8080/pet_home',
-        changeOrigin: true
+        changeOrigin: true,
+        cookiePathRewrite: {
+          '/pet_home': '/'
+        }
       }
     }
   }

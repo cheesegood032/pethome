@@ -19,3 +19,19 @@ export function getNewProducts() {
 export function searchProducts(params) {
   return request({ url: '/product/search', method: 'get', params })
 }
+
+export function getAllProducts(params) {
+  return request({ url: '/admin/product/list', method: 'get', params })
+}
+
+export function addProduct(data) {
+  return request({ url: '/admin/product/add', method: 'post', data })
+}
+
+export function updateProduct(data) {
+  return request({ url: '/admin/product/update', method: 'post', data })
+}
+
+export function deleteProduct(id) {
+  return request({ url: '/admin/product/delete', method: 'post', data: { id } })
+}

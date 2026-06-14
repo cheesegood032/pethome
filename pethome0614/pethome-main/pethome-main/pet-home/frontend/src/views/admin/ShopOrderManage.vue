@@ -12,19 +12,19 @@
     </div>
 
     <el-table :data="orders" border class="order-table">
-      <el-table-column prop="orderNo" label="订单号"></el-table-column>
+      <el-table-column prop="order_no" label="订单号"></el-table-column>
       <el-table-column prop="username" label="用户"></el-table-column>
-      <el-table-column prop="userPhone" label="手机号"></el-table-column>
-      <el-table-column prop="totalPrice" label="金额" width="100">
-        <template slot-scope="scope">¥{{ scope.row.totalPrice }}</template>
+      <el-table-column prop="receiver_phone" label="手机号"></el-table-column>
+      <el-table-column prop="total_price" label="金额" width="100">
+        <template slot-scope="scope">¥{{ scope.row.total_price }}</template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="100">
         <template slot-scope="scope">
           <el-tag :type="getStatusType(scope.row.status)">{{ getStatusText(scope.row.status) }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="180">
-        <template slot-scope="scope">{{ formatTime(scope.row.createTime) }}</template>
+      <el-table-column prop="create_time" label="创建时间" width="180">
+        <template slot-scope="scope">{{ formatTime(scope.row.create_time) }}</template>
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template slot-scope="scope">
@@ -58,7 +58,7 @@ export default {
         const params = {}
         if (this.filterStatus !== null) params.status = this.filterStatus
         const res = await getAdminOrderList(params)
-        this.orders = res.data
+        this.orders = res.data.list || res.data
       } catch (e) {
         console.error(e)
       }

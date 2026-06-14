@@ -1,7 +1,10 @@
 <template>
   <div class="foster-order-page">
     <div class="container">
-      <h2 class="page-title">🏡 寄养订单</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2 class="page-title" style="margin-bottom: 0;">🏡 寄养订单</h2>
+        <el-button type="primary" plain size="small" @click="$router.push('/order')">返回商城订单</el-button>
+      </div>
       <el-tabs v-model="activeTab" @tab-click="handleTabClick">
         <el-tab-pane label="待审核" name="1"></el-tab-pane>
         <el-tab-pane label="待支付" name="2"></el-tab-pane>
