@@ -22,7 +22,7 @@
 
       <!-- 分类卡片 -->
       <div class="section">
-        <h2 class="section-title">🎯 商品分类</h2>
+        <h2 class="section-title">商品分类</h2>
         <div class="category-grid">
           <div class="category-card" v-for="c in categories" :key="c.name" @click="goCategory(c.name)">
             <span class="category-icon">{{ c.icon }}</span>

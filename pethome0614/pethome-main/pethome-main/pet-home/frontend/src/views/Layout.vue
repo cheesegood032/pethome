@@ -5,7 +5,7 @@
       <router-view />
     </main>
     <footer class="footer">
-      <p>© 2024 宠物之家 — 宠物用品购物与寄养预约平台 🐱🐶</p>
+      <p>© 2026 宠物之家 — 宠物用品购物与寄养预约平台</p>
     </footer>
   </div>
 </template>
