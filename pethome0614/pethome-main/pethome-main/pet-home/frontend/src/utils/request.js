@@ -35,6 +35,8 @@ service.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       store.dispatch('logout')
       router.push('/login')
+      Message.error('请先登录')
+      return Promise.reject(error)
     }
     Message.error(error.message || '网络错误')
     return Promise.reject(error)
