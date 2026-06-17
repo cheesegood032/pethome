@@ -43,7 +43,7 @@ export default {
     async fetchUsers() {
       try {
         const res = await getAllUsers()
-        this.users = res.data
+        this.users = res.data.list || res.data
       } catch (e) {
         console.error(e)
       }

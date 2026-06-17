@@ -23,3 +23,19 @@ export function cancelFosterOrder(orderId) {
 export function payFosterOrder(orderId) {
   return request({ url: '/foster/order/pay', method: 'post', data: { orderId } })
 }
+
+export function getAllFosterOrders(params) {
+  return request({ url: '/admin/foster/list', method: 'get', params })
+}
+
+export function auditFosterOrder(data) {
+  if (data.approved) {
+    return request({ url: '/admin/foster/approve', method: 'post', data })
+  } else {
+    return request({ url: '/admin/foster/reject', method: 'post', data })
+  }
+}
+
+export function completeFosterOrder(orderId) {
+  return request({ url: '/admin/foster/complete', method: 'post', data: { orderId } })
+}

@@ -45,11 +45,27 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 寄养订单详情弹窗 -->
+    <el-dialog title="寄养详情" :visible.sync="detailVisible" width="600px">
+      <div v-if="currentOrder">
+        <p><strong>预约号：</strong>{{ currentOrder.order_no }}</p>
+        <p><strong>套餐：</strong>{{ currentOrder.package_name }}</p>
+        <p><strong>日期：</strong>{{ currentOrder.start_date }} ~ {{ currentOrder.end_date }} ({{ currentOrder.total_days }}天)</p>
+        <p><strong>总金额：</strong>¥{{ currentOrder.total_price }}</p>
+        <p><strong>备注：</strong>{{ currentOrder.remark || '无' }}</p>
+        <div v-if="currentOrder.pets && currentOrder.pets.length">
+          <p><strong>宠物：</strong></p>
+          <ul>
+            <li v-for="pet in currentOrder.pets" :key="pet.id">{{ pet.species === '猫' ? '🐱' : '🐶' }} {{ pet.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getAllFosterOrders, auditFosterOrder, completeFosterOrder } from '@/api/foster'
+import { getAllFosterOrders, auditFosterOrder, completeFosterOrder, getFosterOrderDetail } from '@/api/foster'
 import { Message } from 'element-ui'
 
 export default {
@@ -58,7 +74,9 @@ export default {
     return {
       orders: [],
       filterStatus: null,
-      searchKeyword: ''
+      searchKeyword: '',
+      detailVisible: false,
+      currentOrder: null
     }
   },
   mounted() {
@@ -70,7 +88,7 @@ export default {
         const params = {}
         if (this.filterStatus !== null) params.status = this.filterStatus
         const res = await getAllFosterOrders(params)
-        this.orders = res.data
+        this.orders = res.data.list || res.data
       } catch (e) {
         console.error(e)
       }
@@ -123,8 +141,14 @@ export default {
         console.error(e)
       }
     },
-    handleDetail(orderId) {
-      this.$message.info('订单详情: ' + orderId)
+    async handleDetail(orderId) {
+      try {
+        const res = await getFosterOrderDetail(orderId)
+        this.currentOrder = res.data
+        this.detailVisible = true
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
   watch: {

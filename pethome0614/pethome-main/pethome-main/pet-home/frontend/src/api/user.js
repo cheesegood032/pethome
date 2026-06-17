@@ -45,3 +45,19 @@ export function changePassword(data) {
     data
   })
 }
+
+export function getAllUsers(params) {
+  return request({
+    url: '/admin/user/list',
+    method: 'get',
+    params
+  })
+}
+
+export function deleteUser(id) {
+  return request({
+    url: '/admin/user/delete',
+    method: 'post',
+    data: { id }
+  })
+}

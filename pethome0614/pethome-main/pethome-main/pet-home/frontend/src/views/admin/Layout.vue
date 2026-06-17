@@ -16,15 +16,15 @@
         </router-link>
         <router-link to="/admin/shop-order" class="nav-item">
           <i class="el-icon-document"></i>
-          <span>订单管理</span>
+          <span>商城订单</span>
+        </router-link>
+        <router-link to="/admin/foster" class="nav-item">
+          <i class="el-icon-document"></i>
+          <span>寄养订单</span>
         </router-link>
         <router-link to="/admin/users" class="nav-item">
           <i class="el-icon-user"></i>
           <span>用户管理</span>
-        </router-link>
-        <router-link to="/admin/foster" class="nav-item">
-          <i class="el-icon-home"></i>
-          <span>寄养订单</span>
         </router-link>
       </nav>
     </aside>
@@ -53,9 +53,9 @@ export default {
       const titles = {
         '/admin': '控制台',
         '/admin/goods': '商品管理',
-        '/admin/shop-order': '订单管理',
-        '/admin/users': '用户管理',
-        '/admin/foster': '寄养订单'
+        '/admin/shop-order': '商城订单',
+        '/admin/foster': '寄养订单',
+        '/admin/users': '用户管理'
       }
       return titles[this.$route.path] || '控制台'
     }

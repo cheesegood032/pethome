@@ -33,11 +33,27 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 订单详情弹窗 -->
+    <el-dialog title="订单详情" :visible.sync="detailVisible" width="600px">
+      <div v-if="currentOrder">
+        <p><strong>订单号：</strong>{{ currentOrder.order_no }}</p>
+        <p><strong>收货人：</strong>{{ currentOrder.receiver_name }} ({{ currentOrder.receiver_phone }})</p>
+        <p><strong>地址：</strong>{{ currentOrder.receiver_address }}</p>
+        <p><strong>总金额：</strong>¥{{ currentOrder.total_price }}</p>
+        <p><strong>备注：</strong>{{ currentOrder.remark || '无' }}</p>
+        <el-table :data="currentOrder.items" border size="small" style="margin-top: 15px;">
+          <el-table-column prop="product_name" label="商品名称"></el-table-column>
+          <el-table-column prop="spec" label="规格" width="100"></el-table-column>
+          <el-table-column prop="price" label="单价" width="80"></el-table-column>
+          <el-table-column prop="quantity" label="数量" width="80"></el-table-column>
+        </el-table>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getAdminOrderList, shipOrder } from '@/api/order'
+import { getAdminOrderList, shipOrder, getOrderDetail } from '@/api/order'
 import { Message } from 'element-ui'
 
 export default {
@@ -46,7 +62,9 @@ export default {
     return {
       orders: [],
       filterStatus: null,
-      searchKeyword: ''
+      searchKeyword: '',
+      detailVisible: false,
+      currentOrder: null
     }
   },
   mounted() {
@@ -88,8 +106,14 @@ export default {
         console.error(e)
       }
     },
-    handleDetail(orderId) {
-      this.$message.info('订单详情: ' + orderId)
+    async handleDetail(orderId) {
+      try {
+        const res = await getOrderDetail(orderId)
+        this.currentOrder = res.data
+        this.detailVisible = true
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
   watch: {

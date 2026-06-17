@@ -112,7 +112,7 @@ public class AdminOrderServlet extends BaseServlet {
             return;
         }
 
-        String sql = "UPDATE product_order SET status = 3, ship_time = NOW() WHERE id = ? AND status = 2 AND delivery_method = 1";
+        String sql = "UPDATE product_order SET status = 3, ship_time = NOW() WHERE id = ? AND status = 2";
         Connection conn = null;
         PreparedStatement ps = null;
         try {

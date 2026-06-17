@@ -1,9 +1,11 @@
 <template>
   <div class="order-page">
     <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h2 class="page-title" style="margin-bottom: 0;">📦 我的订单</h2>
-        <el-button type="primary" plain size="small" @click="$router.push('/foster/order')">查看寄养订单</el-button>
+      <div style="text-align: center; margin-bottom: 24px;">
+        <el-radio-group v-model="orderType" @change="switchOrderType">
+          <el-radio-button label="shop">商城订单</el-radio-button>
+          <el-radio-button label="foster">寄养订单</el-radio-button>
+        </el-radio-group>
       </div>
       <el-tabs v-model="activeTab" @tab-click="handleTabClick">
         <el-tab-pane label="全部" name="0"></el-tab-pane>
@@ -54,12 +56,17 @@ export default {
   name: 'OrderList',
   data() {
     return {
-      activeTab: '0', orders: [], total: 0, currentPage: 1, pageSize: 10, loading: false
+      orderType: 'shop', activeTab: '0', orders: [], total: 0, currentPage: 1, pageSize: 10, loading: false
     }
   },
   mounted() { this.fetchOrders() },
   methods: {
     ...mapActions(['updatePendingCount']),
+    switchOrderType(val) {
+      if (val === 'foster') {
+        this.$router.push('/foster/order')
+      }
+    },
     async fetchOrders() {
       this.loading = true
       try {

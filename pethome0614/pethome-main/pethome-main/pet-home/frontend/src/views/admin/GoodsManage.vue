@@ -39,7 +39,16 @@
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="分类" prop="category">
-          <el-input v-model="form.category"></el-input>
+          <el-select v-model="form.category" placeholder="请选择分类">
+            <el-option label="猫粮" value="猫粮"></el-option>
+            <el-option label="狗粮" value="狗粮"></el-option>
+            <el-option label="餐具水具" value="餐具水具"></el-option>
+            <el-option label="家居笼具" value="家居笼具"></el-option>
+            <el-option label="外出用品" value="外出用品"></el-option>
+            <el-option label="窝垫床品" value="窝垫床品"></el-option>
+            <el-option label="玩具" value="玩具"></el-option>
+            <el-option label="清洁护理" value="清洁护理"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="适用宠物" prop="pet_type">
           <el-select v-model="form.pet_type" placeholder="请选择">

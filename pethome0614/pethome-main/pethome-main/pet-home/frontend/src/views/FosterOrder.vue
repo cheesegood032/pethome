@@ -1,9 +1,11 @@
 <template>
   <div class="foster-order-page">
     <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h2 class="page-title" style="margin-bottom: 0;">🏡 寄养订单</h2>
-        <el-button type="primary" plain size="small" @click="$router.push('/order')">返回商城订单</el-button>
+      <div style="text-align: center; margin-bottom: 24px;">
+        <el-radio-group v-model="orderType" @change="switchOrderType">
+          <el-radio-button label="shop">商城订单</el-radio-button>
+          <el-radio-button label="foster">寄养订单</el-radio-button>
+        </el-radio-group>
       </div>
       <el-tabs v-model="activeTab" @tab-click="handleTabClick">
         <el-tab-pane label="待审核" name="1"></el-tab-pane>
@@ -56,11 +58,16 @@ export default {
   name: 'FosterOrder',
   data() {
     return {
-      activeTab: '1', orders: [], total: 0, currentPage: 1, pageSize: 10, loading: false
+      orderType: 'foster', activeTab: '1', orders: [], total: 0, currentPage: 1, pageSize: 10, loading: false
     }
   },
   mounted() { this.fetchOrders() },
   methods: {
+    switchOrderType(val) {
+      if (val === 'shop') {
+        this.$router.push('/order')
+      }
+    },
     async fetchOrders() {
       this.loading = true
       try {
