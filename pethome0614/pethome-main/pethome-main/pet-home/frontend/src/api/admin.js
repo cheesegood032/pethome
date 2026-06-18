@@ -21,3 +21,10 @@ export function getAdminInfo() {
     method: 'get'
   })
 }
+
+export function getDashboardStats() {
+  return request({
+    url: '/admin/stats',
+    method: 'get'
+  })
+}
