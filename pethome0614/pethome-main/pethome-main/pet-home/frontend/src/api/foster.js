@@ -36,6 +36,10 @@ export function auditFosterOrder(data) {
   }
 }
 
+export function checkinFosterOrder(orderId) {
+  return request({ url: '/admin/foster/checkin', method: 'post', data: { orderId } })
+}
+
 export function completeFosterOrder(orderId) {
   return request({ url: '/admin/foster/complete', method: 'post', data: { orderId } })
 }
