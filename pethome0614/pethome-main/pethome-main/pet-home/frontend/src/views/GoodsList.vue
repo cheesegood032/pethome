@@ -13,14 +13,12 @@
         </el-select>
         <el-select v-model="category" placeholder="分类" clearable @change="fetchList">
           <el-option label="全部" value=""></el-option>
-          <el-option label="猫粮" value="猫粮"></el-option>
-          <el-option label="狗粮" value="狗粮"></el-option>
-          <el-option label="餐具水具" value="餐具水具"></el-option>
-          <el-option label="家居笼具" value="家居笼具"></el-option>
-          <el-option label="外出用品" value="外出用品"></el-option>
-          <el-option label="窝垫床品" value="窝垫床品"></el-option>
+          <el-option label="主粮零食" value="主粮零食"></el-option>
+          <el-option label="宠物窝笼" value="宠物窝笼"></el-option>
+          <el-option label="洗护用品" value="洗护用品"></el-option>
           <el-option label="玩具" value="玩具"></el-option>
-          <el-option label="清洁护理" value="清洁护理"></el-option>
+          <el-option label="服饰" value="服饰"></el-option>
+          <el-option label="外出用品" value="外出用品"></el-option>
         </el-select>
       </div>
       <div class="product-grid" v-loading="loading">

@@ -85,11 +85,12 @@ export default {
       newLoading: false,
       defaultImg: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%23f5f0eb"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23ccc" font-size="40">🐾</text></svg>',
       categories: [
-        { name: '猫粮', icon: '🐱' },
-        { name: '狗粮', icon: '🐶' },
+        { name: '主粮零食', icon: '🥩' },
+        { name: '宠物窝笼', icon: '🏠' },
+        { name: '洗护用品', icon: '🧴' },
         { name: '玩具', icon: '🎾' },
-        { name: '清洁护理', icon: '🧴' },
-        { name: '餐具水具', icon: '🍽️' }
+        { name: '服饰', icon: '👕' },
+        { name: '外出用品', icon: '🎒' }
       ]
     }
   },
