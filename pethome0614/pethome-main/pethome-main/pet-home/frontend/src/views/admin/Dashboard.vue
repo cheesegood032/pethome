@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getProductCount, getOrderCount, getUserCount, getFosterCount } from '@/api/admin'
+import { getDashboardStats } from '@/api/admin'
 
 export default {
   name: 'Dashboard',
@@ -67,16 +67,14 @@ export default {
   methods: {
     async fetchStats() {
       try {
-        this.productCount = 10
-        this.orderCount = 15
-        this.userCount = 50
-        this.fosterCount = 8
-
-        this.pendingOrders = [
-          { id: 1, orderNo: 'ORD202401010001', username: 'user1', totalPrice: 256.00, status: 1 },
-          { id: 2, orderNo: 'ORD202401010002', username: 'user2', totalPrice: 128.00, status: 2 },
-          { id: 3, orderNo: 'ORD202401010003', username: 'user3', totalPrice: 198.00, status: 1 }
-        ]
+        const res = await getDashboardStats()
+        if (res.data) {
+          this.productCount = res.data.productCount || 0
+          this.orderCount = res.data.orderCount || 0
+          this.userCount = res.data.userCount || 0
+          this.fosterCount = res.data.fosterCount || 0
+          this.pendingOrders = res.data.pendingOrders || []
+        }
       } catch (e) {
         console.error(e)
       }

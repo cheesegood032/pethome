@@ -86,4 +86,17 @@ public class AdminLoginServlet extends BaseServlet {
         Map<String, Object> admin = (Map<String, Object>) session.getAttribute("loginAdmin");
         renderSuccess(resp, admin);
     }
+
+    /**
+     * GET /api/admin/stats — 获取 Dashboard 统计数据
+     */
+    protected void stats(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("loginAdmin") == null) {
+            renderError(resp, 401, "管理员未登录");
+            return;
+        }
+        Map<String, Object> stats = adminDAO.getDashboardStats();
+        renderSuccess(resp, stats);
+    }
 }
