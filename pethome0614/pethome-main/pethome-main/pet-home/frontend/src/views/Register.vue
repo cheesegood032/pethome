@@ -101,7 +101,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ff9f43 0%, #ffb366 40%, #ffd4a0 100%);
+  background-image: url("/images/login_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .register-card {
   background: #fff;

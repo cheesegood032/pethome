@@ -27,11 +27,9 @@
     </div>
   </div>
 </template>
-
 <script>
 import { login as loginApi } from '@/api/user'
 import { mapActions } from 'vuex'
-
 export default {
   name: 'Login',
   data() {
@@ -64,21 +62,25 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .login-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ff9f43 0%, #ffb366 40%, #ffd4a0 100%);
+  /* 替换背景图路径 public/images/login_bg.jpg */
+  background-image: url("/images/login_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .login-card {
   background: #fff;
   padding: 48px 40px 36px;
   border-radius: 20px;
   width: 420px;
-  box-shadow: 0 16px 48px rgba(255,159,67,0.25);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
 }
 .login-header { text-align: center; margin-bottom: 32px; }
 .logo-big { font-size: 48px; margin-bottom: 12px; }

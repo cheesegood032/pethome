@@ -67,7 +67,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* 替换渐变背景为图片，以下是核心修改 */
+  background-image: url("/images/login_bg.jpg"); /* 图片路径 */
+  background-size: cover; /* 让图片覆盖整个容器 */
+  background-position: center; /* 图片居中显示 */
+  background-repeat: no-repeat; /* 禁止图片重复 */
+  background-attachment: fixed; /* 固定背景，滚动时不移动（可选） */
 }
 
 .login-card {
