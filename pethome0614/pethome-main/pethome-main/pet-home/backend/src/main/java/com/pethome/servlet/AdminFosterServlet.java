@@ -37,7 +37,7 @@ public class AdminFosterServlet extends BaseServlet {
         if (orderId <= 0) { renderError(resp, 400, "订单ID不能为空"); return; }
         int rows = fosterDAO.approve(orderId);
         if (rows > 0) renderSuccess(resp, null);
-        else renderError(resp, 400, "审核失败，订单状态不正确");
+        else renderError(resp, 400, "审核失败，订单状态出错");
     }
 
     protected void reject(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -48,7 +48,7 @@ public class AdminFosterServlet extends BaseServlet {
         if (orderId <= 0) { renderError(resp, 400, "订单ID不能为空"); return; }
         int rows = fosterDAO.reject(orderId, reason != null ? reason : "");
         if (rows > 0) renderSuccess(resp, null);
-        else renderError(resp, 400, "驳回失败，订单状态不正确");
+        else renderError(resp, 400, "驳回失败，订单状态出错");
     }
 
     protected void checkin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -57,7 +57,7 @@ public class AdminFosterServlet extends BaseServlet {
         if (orderId <= 0) { renderError(resp, 400, "订单ID不能为空"); return; }
         int rows = fosterDAO.checkin(orderId);
         if (rows > 0) renderSuccess(resp, null);
-        else renderError(resp, 400, "入住操作失败，订单状态不正确");
+        else renderError(resp, 400, "入住操作失败，订单状态出错");
     }
 
     protected void complete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -66,7 +66,7 @@ public class AdminFosterServlet extends BaseServlet {
         if (orderId <= 0) { renderError(resp, 400, "订单ID不能为空"); return; }
         int rows = fosterDAO.completeFoster(orderId);
         if (rows > 0) renderSuccess(resp, null);
-        else renderError(resp, 400, "完成操作失败，订单状态不正确");
+        else renderError(resp, 400, "完成操作失败，订单状态出错");
     }
 
     protected void monthly(HttpServletRequest req, HttpServletResponse resp) throws IOException {
