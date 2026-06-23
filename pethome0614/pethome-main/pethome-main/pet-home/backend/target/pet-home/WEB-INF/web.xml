@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>PetHome</display-name>
+
+    <!-- ============ Filters ============ -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>com.pethome.filter.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.pethome.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/cart/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/order/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/pet/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/foster/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/user/info</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/user/update</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/user/logout</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/user/changePassword</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/comment/add</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/comment/status</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminLoginFilter</filter-name>
+        <filter-class>com.pethome.filter.AdminLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminLoginFilter</filter-name>
+        <url-pattern>/api/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- ============ DefaultServlet for Uploads ============ -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/uploads/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============ User-Facing Servlets ============ -->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/api/user/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.ProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/api/product/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/api/cart/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/api/order/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PetServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.PetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PetServlet</servlet-name>
+        <url-pattern>/api/pet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FosterServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.FosterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FosterServlet</servlet-name>
+        <url-pattern>/api/foster/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StoreServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.StoreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoreServlet</servlet-name>
+        <url-pattern>/api/store/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/api/comment/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============ Admin Servlets ============ -->
+    <servlet>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <url-pattern>/api/admin/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <url-pattern>/api/admin/product/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/api/admin/order/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminFosterServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminFosterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminFosterServlet</servlet-name>
+        <url-pattern>/api/admin/foster/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminUserServlet</servlet-name>
+        <url-pattern>/api/admin/user/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminCommentServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminCommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCommentServlet</servlet-name>
+        <url-pattern>/api/admin/comment/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============ Session Config ============ -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

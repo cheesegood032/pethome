@@ -107,7 +107,7 @@ export default {
         {
           icon: '🏪',
           title: '直营门店',
-          desc: '覆盖北京、深圳、上海核心区域'
+          desc: '覆盖南昌核心区域'
         },
         {
           icon: '💎',
