@@ -22,7 +22,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (res.code !== 200) {
-      Message.error(res.msg || '请求失败')
+      Message({ message: res.msg || '请求失败', type: 'error', duration: 1500 })
       if (res.code === 401) {
         store.dispatch('logout')
         router.push('/login')
@@ -35,10 +35,10 @@ service.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       store.dispatch('logout')
       router.push('/login')
-      Message.error('请先登录')
+      Message({ message: '请先登录', type: 'error', duration: 1500 })
       return Promise.reject(error)
     }
-    Message.error(error.message || '网络错误')
+    Message({ message: error.message || '网络错误', type: 'error', duration: 1500 })
     return Promise.reject(error)
   }
 )

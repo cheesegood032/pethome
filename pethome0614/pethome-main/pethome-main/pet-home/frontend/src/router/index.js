@@ -36,7 +36,8 @@ const routes = [
       { path: 'goods', name: 'GoodsManage', component: () => import('@/views/admin/GoodsManage.vue') },
       { path: 'shop-order', name: 'ShopOrderManage', component: () => import('@/views/admin/ShopOrderManage.vue') },
       { path: 'users', name: 'UserManage', component: () => import('@/views/admin/UserManage.vue') },
-      { path: 'foster', name: 'FosterManage', component: () => import('@/views/admin/FosterManage.vue') }
+      { path: 'foster', name: 'FosterManage', component: () => import('@/views/admin/FosterManage.vue') },
+      { path: 'comments', name: 'CommentManage', component: () => import('@/views/admin/CommentManage.vue') }
     ]
   },
   {

@@ -53,6 +53,14 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/api/user/changePassword</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/comment/add</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/comment/status</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>AdminLoginFilter</filter-name>
@@ -133,6 +141,15 @@
         <url-pattern>/api/store/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/api/comment/*</url-pattern>
+    </servlet-mapping>
+
     <!-- ============ Admin Servlets ============ -->
     <servlet>
         <servlet-name>AdminLoginServlet</servlet-name>
@@ -177,6 +194,15 @@
     <servlet-mapping>
         <servlet-name>AdminUserServlet</servlet-name>
         <url-pattern>/api/admin/user/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminCommentServlet</servlet-name>
+        <servlet-class>com.pethome.servlet.AdminCommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCommentServlet</servlet-name>
+        <url-pattern>/api/admin/comment/*</url-pattern>
     </servlet-mapping>
 
     <!-- ============ Session Config ============ -->

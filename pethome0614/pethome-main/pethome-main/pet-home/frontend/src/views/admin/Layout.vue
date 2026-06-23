@@ -26,6 +26,10 @@
           <i class="el-icon-user"></i>
           <span>用户管理</span>
         </router-link>
+        <router-link to="/admin/comments" class="nav-item">
+          <i class="el-icon-chat-dot-round"></i>
+          <span>评论管理</span>
+        </router-link>
       </nav>
     </aside>
     <main class="main-content">
@@ -55,7 +59,8 @@ export default {
         '/admin/goods': '商品管理',
         '/admin/shop-order': '商城订单',
         '/admin/foster': '寄养订单',
-        '/admin/users': '用户管理'
+        '/admin/users': '用户管理',
+        '/admin/comments': '评论管理'
       }
       return titles[this.$route.path] || '控制台'
     }
