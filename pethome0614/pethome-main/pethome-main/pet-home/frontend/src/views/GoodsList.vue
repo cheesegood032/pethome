@@ -85,13 +85,9 @@ export default {
     return {
       keyword: '', petType: '', category: '', sortBy: '',
       list: [], hotProducts: [], total: 0, currentPage: 1, pageSize: 12,
+      allData: [], // 存储所有商品数据，用于前端排序
       loading: false,
       defaultImg: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%23f5f0eb"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23ccc" font-size="40">🐾</text></svg>',
-      banners: [
-        { title: '🎉 新用户专享', subtitle: '首单立减10元，限时优惠中', icon: '🎁', color: 'linear-gradient(135deg, #ff9f43, #ff6b6b)' },
-        { title: '🏠 寄养预约', subtitle: '专业护理，让爱宠享受假期', icon: '🐱', color: 'linear-gradient(135deg, #54a0ff, #2e86de)' },
-        { title: '🛒 满减优惠', subtitle: '满199减20，满399减50', icon: '💰', color: 'linear-gradient(135deg, #00b894, #00a381)' }
-      ]
     }
   },
   mounted() {
@@ -112,14 +108,39 @@ export default {
     async fetchList() {
       this.loading = true
       try {
-        const params = { page: this.currentPage, pageSize: this.pageSize }
+        // 获取所有商品（不分页，一次性获取全部）
+        const params = { page: 1, pageSize: 999 }
         if (this.keyword) params.keyword = this.keyword
         if (this.petType) params.pet_type = this.petType
         if (this.category) params.category = this.category
-        if (this.sortBy) params.sort = this.sortBy
+        // 注意：这里不传 sort 参数
         const res = await getProductList(params)
-        this.list = res.data.list || []
-        this.total = res.data.total || 0
+        let data = res.data.list || []
+
+        // ===== 前端排序 =====
+        if (this.sortBy) {
+          switch (this.sortBy) {
+            case 'price_asc':
+              data.sort((a, b) => a.price - b.price)
+              break
+            case 'price_desc':
+              data.sort((a, b) => b.price - a.price)
+              break
+            case 'sales_desc':
+              data.sort((a, b) => (b.sales_count || 0) - (a.sales_count || 0))
+              break
+            default:
+              break
+          }
+        }
+
+        // 前端分页
+        this.total = data.length
+        const start = (this.currentPage - 1) * this.pageSize
+        const end = start + this.pageSize
+        this.list = data.slice(start, end)
+        this.allData = data // 保存全部数据
+
       } catch (e) { console.error(e) }
       this.loading = false
     },
@@ -133,6 +154,11 @@ export default {
       this.keyword = q.keyword || ''
       this.petType = q.pet_type || ''
       this.category = q.category || ''
+      this.currentPage = 1
+      this.fetchList()
+    },
+    // 监听排序变化，重新获取数据
+    sortBy() {
       this.currentPage = 1
       this.fetchList()
     }

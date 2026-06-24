@@ -62,10 +62,10 @@
           <el-input-number v-model="form.stock" :min="0" :step="1"></el-input-number>
         </el-form-item>
         <el-form-item label="规格" prop="spec">
-          <el-input v-model="form.spec"></el-input>
+          <el-input v-model="form.spec" placeholder="如：S,M,L 或 1kg,2kg"></el-input>
         </el-form-item>
         <el-form-item label="商品描述" prop="description">
-          <el-input type="textarea" v-model="form.description"></el-input>
+          <el-input type="textarea" v-model="form.description" :rows="3"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -105,10 +105,16 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const params = {}
+        const params = {
+          page: 1,
+          pageSize: 999  // 获取所有商品
+        }
         if (this.searchKeyword) params.keyword = this.searchKeyword
         const res = await getAllProducts(params)
-        this.products = res.data.list || res.data
+        let data = res.data.list || res.data || []
+        // 按ID降序排列（最新的在前面）
+        data.sort((a, b) => b.id - a.id)
+        this.products = data
       } catch (e) {
         console.error(e)
       }
@@ -117,7 +123,16 @@ export default {
       this.fetchProducts()
     },
     handleAdd() {
-      this.form = { id: null, name: '', category: '', pet_type: '', price: 0, stock: 0, spec: '', description: '' }
+      this.form = {
+        id: null,
+        name: '',
+        category: '',
+        pet_type: '',
+        price: 0,
+        stock: 0,
+        spec: '',
+        description: ''
+      }
       this.dialogVisible = true
     },
     handleEdit(row) {

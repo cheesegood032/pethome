@@ -1,6 +1,12 @@
 <template>
   <div class="goods-detail" v-loading="loading">
     <div class="container" v-if="product">
+      <!-- 返回商城按钮 -->
+      <div class="back-bar">
+        <el-button type="text" @click="$router.push('/goods')" class="back-btn">
+          <i class="el-icon-arrow-left"></i> 返回商城
+        </el-button>
+      </div>
       <div class="detail-card">
         <div class="detail-left">
           <div class="product-image">
