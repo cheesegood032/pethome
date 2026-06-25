@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+// 【功能：用户登录】
 export function login(data) {
   return request({
     url: '/user/login',
@@ -7,7 +7,7 @@ export function login(data) {
     data
   })
 }
-
+// 【功能：用户注册】
 export function register(data) {
   return request({
     url: '/user/register',
@@ -15,21 +15,21 @@ export function register(data) {
     data
   })
 }
-
+// 【功能：退出登录】
 export function logout() {
   return request({
     url: '/user/logout',
     method: 'post'
   })
 }
-
+// 【功能：获取个人信息】
 export function getUserInfo() {
   return request({
     url: '/user/info',
     method: 'get'
   })
 }
-
+// 【功能：更新个人信息】
 export function updateUser(data) {
   return request({
     url: '/user/update',
@@ -37,7 +37,7 @@ export function updateUser(data) {
     data
   })
 }
-
+// 【功能：修改密码】
 export function changePassword(data) {
   return request({
     url: '/user/changePassword',
@@ -45,7 +45,7 @@ export function changePassword(data) {
     data
   })
 }
-
+// 【功能：获取所有用户（管理员）】
 export function getAllUsers(params) {
   return request({
     url: '/admin/user/list',
@@ -53,7 +53,7 @@ export function getAllUsers(params) {
     params
   })
 }
-
+// 【功能：删除用户（管理员）】
 export function deleteUser(id) {
   return request({
     url: '/admin/user/delete',
