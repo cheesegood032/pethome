@@ -99,12 +99,14 @@ export default {
     this.fetchList()
   },
   methods: {
+    // 成员A：负责获取热销商品推荐列表并在页面顶部展示
     async fetchHot() {
       try {
         const res = await getHotProducts()
         this.hotProducts = res.data || []
       } catch (e) { console.error(e) }
     },
+    // 成员A：负责实现商品列表的获取、前端分页与多条件排序功能
     async fetchList() {
       this.loading = true
       try {
@@ -144,6 +146,7 @@ export default {
       } catch (e) { console.error(e) }
       this.loading = false
     },
+    // 成员A：负责实现商品卡片点击跳转到商品详情页的功能
     goDetail(id) {
       this.$router.push(`/goods/${id}`)
     }

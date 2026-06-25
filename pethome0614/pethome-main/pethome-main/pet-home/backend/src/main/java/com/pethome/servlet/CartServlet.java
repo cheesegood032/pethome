@@ -26,6 +26,7 @@ public class CartServlet extends BaseServlet {
 
     /**
      * POST /api/cart/add — 加入购物车
+     * // 成员A：负责实现将商品加入购物车的功能，如果购物车中已有同款商品则累加数量，否则插入新记录
      */
     protected void add(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -56,6 +57,7 @@ public class CartServlet extends BaseServlet {
 
     /**
      * GET /api/cart/list — 购物车列表
+     * // 成员A：负责实现获取当前用户的购物车列表数据，供前端展示购物车明细
      */
     protected void list(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -65,6 +67,7 @@ public class CartServlet extends BaseServlet {
 
     /**
      * POST /api/cart/update — 修改数量
+     * // 成员A：负责实现更新购物车中商品数量的功能，支持前端增加或减少购物车商品数量
      */
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Map<String, Object> body = parseBody(req);
@@ -92,6 +95,7 @@ public class CartServlet extends BaseServlet {
 
     /**
      * POST /api/cart/delete — 删除单条
+     * // 成员A：负责实现从购物车中删除指定单条商品记录的功能
      */
     protected void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -134,6 +138,7 @@ public class CartServlet extends BaseServlet {
 
     /**
      * POST /api/cart/clear — 清空购物车
+     * // 成员A：负责实现清空当前用户购物车所有商品记录的功能，常用于订单结算后
      */
     protected void clear(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
