@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 
+// 获取寄养套餐列表
 export function getPackageList() {
   return request({ url: '/foster/package/list', method: 'get' })
 }
@@ -11,7 +12,7 @@ export function getFosterOrderList(params) {
 export function getFosterOrderDetail(id) {
   return request({ url: '/foster/order/detail', method: 'get', params: { id } })
 }
-
+// 创建寄养订单
 export function createFosterOrder(data) {
   return request({ url: '/foster/order/create', method: 'post', data })
 }

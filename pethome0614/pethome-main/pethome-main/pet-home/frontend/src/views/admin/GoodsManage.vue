@@ -103,6 +103,7 @@ export default {
     this.fetchProducts()
   },
   methods: {
+    // 方法1：获取商品列表
     async fetchProducts() {
       try {
         const params = {
@@ -139,6 +140,7 @@ export default {
       this.form = { ...row }
       this.dialogVisible = true
     },
+    // 方法2：添加商品
     submitForm() {
       this.$refs.productForm.validate(async valid => {
         if (!valid) return
@@ -157,6 +159,7 @@ export default {
         }
       })
     },
+    // 方法3：上架/下架商品
     async handleToggleStatus(row) {
       try {
         await updateProduct({ id: row.id, status: row.status === 1 ? 0 : 1 })
