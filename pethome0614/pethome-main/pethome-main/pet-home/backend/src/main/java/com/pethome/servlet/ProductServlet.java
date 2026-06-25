@@ -1,4 +1,4 @@
-package com.pethome.servlet;
+﻿package com.pethome.servlet;
 
 import com.pethome.dao.ProductDAO;
 
@@ -19,7 +19,7 @@ public class ProductServlet extends BaseServlet {
     /**
      * GET /api/product/list
      * 商品列表（分页，支持 keyword/pet_type/category 筛选）
-     * // 成员A：负责实现商品列表分页查询与多条件筛选功能，为前端商城浏览提供数据支持
+     * // A：负责实现商品列表分页查询与多条件筛选功能，为前端商城浏览提供数据支持
      */
     protected void list(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String keyword = req.getParameter("keyword");
@@ -33,7 +33,7 @@ public class ProductServlet extends BaseServlet {
 
     /**
      * GET /api/product/detail?id=
-     * // 成员A：负责实现获取指定商品详细信息的功能，用于前端商品详情页的数据展示
+     * // A：负责实现获取指定商品详细信息的功能，用于前端商品详情页的数据展示
      */
     protected void detail(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long id = getLongParam(req, "id", 0);
@@ -51,7 +51,7 @@ public class ProductServlet extends BaseServlet {
 
     /**
      * GET /api/product/hot — 热销Top5
-     * // 成员A：负责实现热销商品查询功能，在商城首页展示销量最高的商品
+     * // A：负责实现热销商品查询功能，在商城首页展示销量最高的商品
      */
     protected void hot(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Map<String, Object>> list = productDAO.findHot();
@@ -69,7 +69,7 @@ public class ProductServlet extends BaseServlet {
 
     /**
      * GET /api/product/all — 全部上架商品
-     * // 成员A：负责实现获取所有已上架商品的功能，提供完整的商品数据目录
+     * // A：负责实现获取所有已上架商品的功能，提供完整的商品数据目录
      */
     protected void all(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Map<String, Object>> list = productDAO.findAll();
