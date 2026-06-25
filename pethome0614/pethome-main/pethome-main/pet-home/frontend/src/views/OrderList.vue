@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="order-page">
     <div class="container">
       <div style="text-align: center; margin-bottom: 24px;">
@@ -110,7 +110,7 @@ export default {
         this.$router.push('/foster/order')
       }
     },
-    // 成员A：负责实现用户订单列表的分页查询及按状态进行分类展示的功能
+    // A：负责实现用户订单列表的分页查询及按状态进行分类展示的功能
     async fetchOrders() {
       this.loading = true
       try {
@@ -146,7 +146,7 @@ export default {
       this.commentForm = { rating: 5, content: '' }
       this.commentDialogVisible = true
     },
-    // 成员A：负责实现对已购买商品提交文字及星级评价的功能
+    // A：负责实现对已购买商品提交文字及星级评价的功能
     async submitComment() {
       if (!this.commentForm.content.trim()) {
         this.$message.warning('请输入评价内容')
@@ -172,7 +172,7 @@ export default {
       this.submittingComment = false
     },
     handleTabClick() { this.currentPage = 1; this.fetchOrders() },
-    // 成员A：负责实现模拟订单支付的功能，将订单状态变为已支付
+    // A：负责实现模拟订单支付的功能，将订单状态变为已支付
     async handlePay(order) {
       try {
         await payOrder(order.id)
@@ -181,7 +181,7 @@ export default {
         this.refreshBadge()
       } catch (e) { console.error(e) }
     },
-    // 成员A：负责实现用户确认收货的功能，将订单状态变更为已完成
+    // A：负责实现用户确认收货的功能，将订单状态变更为已完成
     async handleComplete(order) {
       try {
         await completeOrder(order.id)

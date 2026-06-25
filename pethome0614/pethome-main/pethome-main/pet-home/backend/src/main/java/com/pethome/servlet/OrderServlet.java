@@ -1,4 +1,4 @@
-package com.pethome.servlet;
+﻿package com.pethome.servlet;
 
 import com.alibaba.fastjson.JSONArray;
 import com.pethome.dao.CartDAO;
@@ -34,7 +34,7 @@ public class OrderServlet extends BaseServlet {
 
     /**
      * POST /api/order/create — 创建订单（事务）
-     * // 成员A：负责实现购物车结算并生成订单的功能，包含扣减库存、生成订单表、订单明细表以及清空购物车，通过数据库事务保证数据一致性
+     * // A：负责实现购物车结算并生成订单的功能，包含扣减库存、生成订单表、订单明细表以及清空购物车，通过数据库事务保证数据一致性
      */
     protected void create(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -166,7 +166,7 @@ public class OrderServlet extends BaseServlet {
 
     /**
      * GET /api/order/list — 我的订单列表
-     * // 成员A：负责实现用户订单列表的分页查询与状态过滤功能
+     * // A：负责实现用户订单列表的分页查询与状态过滤功能
      */
     protected void list(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -184,7 +184,7 @@ public class OrderServlet extends BaseServlet {
 
     /**
      * GET /api/order/detail — 订单详情
-     * // 成员A：负责实现获取指定订单详细信息的功能，用于前端订单详情页的数据展示
+     * // A：负责实现获取指定订单详细信息的功能，用于前端订单详情页的数据展示
      */
     protected void detail(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String oidStr = req.getParameter("orderId");
@@ -204,7 +204,7 @@ public class OrderServlet extends BaseServlet {
 
     /**
      * POST /api/order/pay — 模拟支付 (1→2)
-     * // 成员A：负责实现订单支付模拟功能，将订单状态从待支付更新为已支付
+     * // A：负责实现订单支付模拟功能，将订单状态从待支付更新为已支付
      */
     protected void pay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -223,7 +223,7 @@ public class OrderServlet extends BaseServlet {
 
     /**
      * POST /api/order/complete — 用户确认完成 (3→4)
-     * // 成员A：负责实现订单确认收货的功能，将订单状态从待收货更新为已完成
+     * // A：负责实现订单确认收货的功能，将订单状态从待收货更新为已完成
      */
     protected void complete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
@@ -249,7 +249,7 @@ public class OrderServlet extends BaseServlet {
 
     /**
      * POST /api/order/cancel — 取消订单 (1→9)
-     * // 成员A：负责实现未支付订单的取消功能，更新状态为已取消
+     * // A：负责实现未支付订单的取消功能，更新状态为已取消
      */
     protected void cancel(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long userId = getUserId(req);
