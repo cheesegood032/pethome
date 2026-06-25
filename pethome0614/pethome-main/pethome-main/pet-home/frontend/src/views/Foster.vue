@@ -97,6 +97,7 @@ export default {
     }
   },
   computed: {
+    // 根据选中的套餐ID获取套餐对象
     selectedPackage() {
       return this.packages.find(p => p.id === this.selectedPackageId) || null
     },
@@ -116,12 +117,15 @@ export default {
     this.fetchPackages()
   },
   methods: {
+    // 获取宠物列表（调用后端 API）
     async fetchPets() {
       try { const res = await getPetList(); this.pets = res.data || [] } catch (e) { console.error(e) }
     },
+    // 获取套餐列表（调用后端 API）
     async fetchPackages() {
       try { const res = await getPackageList(); this.packages = res.data || [] } catch (e) { console.error(e) }
     },
+    // 下一步：校验用户是否已完成当前步骤
     nextStep() {
       if (this.currentStep === 0 && this.selectedPetIds.length === 0) {
         this.$message.warning('请至少选择一只宠物'); return
@@ -131,6 +135,7 @@ export default {
       }
       this.currentStep++
     },
+    //发起请求
     async submitFoster() {
       if (!this.dateRange || this.dateRange.length < 2) {
         this.$message.warning('请选择日期范围'); return
