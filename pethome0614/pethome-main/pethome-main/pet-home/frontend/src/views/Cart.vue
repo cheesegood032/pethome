@@ -109,6 +109,7 @@ export default {
     }
   },
   methods: {
+    // 成员A：负责实现获取当前登录用户购物车数据并在表格中展示的功能
     async fetchCart() {
       this.loading = true
       try {
@@ -124,10 +125,12 @@ export default {
       } catch (e) { console.error(e) }
     },
     handleSelChange(val) { this.selected = val },
+    // 成员A：负责实现购物车商品数量的修改并同步到后端数据库的功能
     async updateQty(row) {
       try { await updateCartQuantity({ id: row.id, quantity: row.quantity }) }
       catch (e) { console.error(e) }
     },
+    // 成员A：负责实现从购物车中移除指定商品的功能
     async removeItem(row) {
       try {
         await removeFromCart(row.id)
@@ -135,6 +138,7 @@ export default {
         this.$message.success('已删除')
       } catch (e) { console.error(e) }
     },
+    // 成员A：负责实现购物车结算功能，收集用户选择的商品及收货/自提信息并提交生成订单
     async submitOrder() {
       if (this.selected.length === 0) return
       if (this.deliveryMethod === 1 && !this.receiverAddress) {

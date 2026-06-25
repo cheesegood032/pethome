@@ -8,7 +8,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 // 全局设置 Element UI Message 提示的显示时长（单位：毫秒）
-// 默认是 3000ms，这里改为 1500ms
 const originalMessage = Message
 const shortMessage = function (options) {
   if (typeof options === 'string') {
@@ -19,18 +18,18 @@ const shortMessage = function (options) {
   }
   return originalMessage(options)
 }
-;['success', 'warning', 'info', 'error'].forEach(type => {
-  shortMessage[type] = function (options) {
-    if (typeof options === 'string') {
-      options = { message: options }
+  ;['success', 'warning', 'info', 'error'].forEach(type => {
+    shortMessage[type] = function (options) {
+      if (typeof options === 'string') {
+        options = { message: options }
+      }
+      options.type = type
+      if (!options.duration && options.duration !== 0) {
+        options.duration = 1500
+      }
+      return originalMessage(options)
     }
-    options.type = type
-    if (!options.duration && options.duration !== 0) {
-      options.duration = 1500
-    }
-    return originalMessage(options)
-  }
-})
+  })
 shortMessage.close = originalMessage.close
 shortMessage.closeAll = originalMessage.closeAll
 Vue.prototype.$message = shortMessage
